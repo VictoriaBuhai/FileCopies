@@ -15,6 +15,7 @@ namespace FileCopy
         Create_file = 5,
         Delete_file = 6,
         File_info = 7,
+        Move_file = 8,
         Exit = 0
     }
     public class Menu
@@ -127,6 +128,24 @@ namespace FileCopy
             Console.ReadKey();
         }
 
+        public void Move_file()
+        {
+            Console.WriteLine("Type the way to file: ");
+            string path = $"{Console.ReadLine()}";
+            Console.WriteLine("Type new way to file: ");
+            string newPath = $"{Console.ReadLine()}";
+            FileInfo fileInf = new FileInfo(path);
+            if (fileInf.Exists)
+            {
+                fileInf.MoveTo(newPath);
+                Console.WriteLine("Operation was successfully completed!");
+            }
+            else
+            {
+                Console.WriteLine("Something go wrong, please try again");
+            }
+            Console.ReadKey();
+        }
         public void Execute(char command)
         {
             switch (command)
@@ -151,6 +170,9 @@ namespace FileCopy
                     break;
                 case '7':
                     File_info();
+                    break;
+                case '8':
+                    Move_file();
                     break;
                 case '0':
                     Console.WriteLine("Goodbye^_^");
